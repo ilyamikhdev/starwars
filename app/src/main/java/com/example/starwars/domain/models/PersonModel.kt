@@ -5,8 +5,8 @@ import com.example.starwars.AllPeopleQuery
 data class PersonModel(
     val id: String,
     val name: String?,
-    val mass: Double?,
     val height: Int?,
+    val mass: Double?
 )
 
 fun List<AllPeopleQuery.Person?>?.mapToPersonModelList(): List<PersonModel> {
@@ -14,8 +14,8 @@ fun List<AllPeopleQuery.Person?>?.mapToPersonModelList(): List<PersonModel> {
         PersonModel(
             id = it?.id ?: "",
             name = it?.name,
-            mass = it?.mass,
-            height = it?.height
+            height = it?.height,
+            mass = it?.mass
         )
     } ?: emptyList()
 }

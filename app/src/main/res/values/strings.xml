@@ -5,4 +5,10 @@
     <string name="mass">mass: %1$s</string>
     <string name="error">ERROR: %1$s</string>
     <string name="loading">L O A D I N G …</string>
+    <string name="home_world">Homeworld: %1$s</string>
+    <string name="population">Population: %1$s</string>
+    <string name="gravity">Gravity: %1$s</string>
+    <string name="orbitalPeriod">Orbital Period: %1$s</string>
+    <string name="rotationPeriod">Rotation Period: %1$s</string>
+    <string name="surfaceWater">SurfaceWater: %1$s</string>
 </resources>

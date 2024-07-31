@@ -3,7 +3,7 @@ package com.example.starwars.data.api
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Optional
 import com.example.starwars.AllPeopleQuery
-import com.example.starwars.PersonDetailsByIdQuery
+import com.example.starwars.PersonByIdQuery
 
 import javax.inject.Inject
 
@@ -14,5 +14,5 @@ class GraphQLApi @Inject constructor(
     suspend fun getAllPeople() = apolloClient.query(AllPeopleQuery()).execute()
 
     suspend fun getPersonDetailsById(personId: String) =
-        apolloClient.query(PersonDetailsByIdQuery(personId = Optional.present(personId))).execute()
+        apolloClient.query(PersonByIdQuery(personId = Optional.present(personId))).execute()
 }

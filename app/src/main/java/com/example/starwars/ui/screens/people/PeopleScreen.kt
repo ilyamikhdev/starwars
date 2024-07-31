@@ -32,11 +32,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.starwars.R
 import com.example.starwars.domain.models.PersonModel
-import com.example.starwars.nav.ScreenRoutes
+import com.example.starwars.nav.Routes
 import com.example.starwars.ui.common.UIState
-import com.example.starwars.ui.theme.Color00000000
 import com.example.starwars.ui.theme.ColorFF1E1266
-import com.example.starwars.ui.theme.ColorFFFFFFFF
+import com.example.starwars.ui.theme.ColorTransparent
+import com.example.starwars.ui.theme.ColorWhite
 import com.example.starwars.ui.theme.StarwarsTheme
 import com.example.starwars.ui.widgets.CustomSurface
 
@@ -45,7 +45,7 @@ fun PeopleScreen(viewModel: PeopleViewModel, navController: NavController) {
     val peopleState = viewModel.screenState.collectAsState().value
     ContentScreen(
         onClick = { id ->
-            navController.navigate(ScreenRoutes.PersonScreen.addArg(id))
+            navController.navigate(Routes.Person.addArg(id))
         },
         peopleState = peopleState
     )
@@ -57,7 +57,7 @@ fun ContentScreen(
     peopleState: PeopleState
 ) {
     Scaffold(
-        containerColor = Color00000000,
+        containerColor = ColorTransparent,
         content = { innerPadding ->
             when (peopleState.state) {
                 UIState.LOADING -> {
@@ -104,9 +104,9 @@ fun PeopleList(
                         textAlign = TextAlign.Start,
                         text = stringResource(id = R.string.title_people),
                         style = MaterialTheme.typography.headlineLarge,
-                        color = ColorFFFFFFFF,
+                        color = ColorWhite,
                     )
-                    HorizontalDivider(color = ColorFFFFFFFF.copy(alpha = 0.3f))
+                    HorizontalDivider(color = ColorWhite.copy(alpha = 0.3f))
                 }
             }
         }
@@ -137,7 +137,7 @@ fun PersonItem(person: PersonModel, onClick: ((String) -> Unit)? = null) {
         Icon(
             modifier = Modifier.size(32.dp),
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-            tint = ColorFFFFFFFF,
+            tint = ColorWhite,
             contentDescription = null
         )
 
@@ -152,7 +152,7 @@ fun Label(modifier: Modifier = Modifier, text: String) {
         modifier = modifier,
         text = text,
         style = MaterialTheme.typography.titleMedium,
-        color = ColorFFFFFFFF,
+        color = ColorWhite,
     )
 }
 
@@ -176,9 +176,9 @@ fun ContentScreenPreview() {
                 PeopleState(
                     state = UIState.DATA,
                     data = listOf(
-                        PersonModel("ID", "Name", 100.1, 19),
-                        PersonModel("ID", "Name", 100.1, 19),
-                        PersonModel("ID", "Name", 100.1, 19),
+                        PersonModel(id = "ID", name = "Name", height = 19, mass = 100.1),
+                        PersonModel(id = "ID", name = "Name", height = 19, mass = 100.1),
+                        PersonModel(id = "ID", name = "Name", height = 19, mass = 100.1),
                     ),
                 )
             )

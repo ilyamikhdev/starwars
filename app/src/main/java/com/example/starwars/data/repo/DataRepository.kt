@@ -1,10 +1,12 @@
 package com.example.starwars.data.repo
 
 import com.example.starwars.AllPeopleQuery
-import com.example.starwars.PersonDetailsByIdQuery
+import com.example.starwars.PersonByIdQuery
 import com.example.starwars.data.api.GraphQLApi
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DataRepository  @Inject constructor(
     private val api: GraphQLApi,
 ) {
@@ -28,7 +30,7 @@ class DataRepository  @Inject constructor(
         }
     }
 
-    suspend fun loadPersonById(id: String): Result<PersonDetailsByIdQuery.Person> {
+    suspend fun loadPersonById(id: String): Result<PersonByIdQuery.Person> {
         return try {
             val response = api.getPersonDetailsById(id)
 

@@ -1,8 +1,8 @@
-package com.example.starwars.ui.screens.people
+package com.example.starwars.ui.screens.person
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.starwars.domain.PeopleUseCase
+import com.example.starwars.domain.PersonUseCase
 import com.example.starwars.domain.RequestResult
 import com.example.starwars.ui.common.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,16 +13,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PeopleViewModel @Inject constructor(
-    private val useCase: PeopleUseCase
+class PersonViewModel @Inject constructor(
+    private val useCase: PersonUseCase
 ) : ViewModel() {
-    private val _screenState = MutableStateFlow(PeopleState())
-    val screenState: StateFlow<PeopleState> = _screenState
 
-    init {
+    private val _screenState = MutableStateFlow(PersonState())
+    val screenState: StateFlow<PersonState> = _screenState
+
+    fun loadPerson(id: String) {
         _screenState.update { it.copy(state = UIState.LOADING) }
         viewModelScope.launch {
-            when (val result = useCase()) {
+            when (val result = useCase.invoke(id)) {
                 is RequestResult.Success -> _screenState.update {
                     it.copy(
                         state = UIState.DATA,
@@ -39,4 +40,9 @@ class PeopleViewModel @Inject constructor(
             }
         }
     }
+
+    fun onShowDialog(show: Boolean) {
+        _screenState.update { it.copy(showDialog = show) }
+    }
+
 }

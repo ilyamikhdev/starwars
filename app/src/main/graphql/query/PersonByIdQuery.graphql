@@ -1,0 +1,15 @@
+query PersonByIdQuery($personId: ID) {
+    person(id: $personId) {
+        id
+        name
+        homeworld {
+            id
+            name
+            population
+            gravity
+            orbitalPeriod
+            rotationPeriod
+            surfaceWater
+        }
+    }
+}

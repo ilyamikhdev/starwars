@@ -7,9 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.starwars.ui.theme.Color00000000
-import com.example.starwars.ui.theme.ColorFF000000
+import com.example.starwars.ui.theme.ColorBlack
 import com.example.starwars.ui.theme.ColorFF1E1266
+import com.example.starwars.ui.theme.ColorTransparent
 
 @Composable
 fun CustomSurface(block: @Composable () -> Unit) {
@@ -20,11 +20,11 @@ fun CustomSurface(block: @Composable () -> Unit) {
                 brush = Brush.verticalGradient(
                     colors = listOf(
                         ColorFF1E1266,
-                        ColorFF000000
+                        ColorBlack
                     )
                 )
             ),
-        color = Color00000000
+        color = ColorTransparent
     ) {
         block()
     }
