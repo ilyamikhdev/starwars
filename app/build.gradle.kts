@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.apollo)
+    kotlin("kapt")
 }
 
 android {
@@ -23,9 +26,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL", "\"https://swapi-graphql.netlify.app/.netlify/functions/index\"")
+            isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://swapi-graphql.netlify.app/.netlify/functions/index\"")
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -37,12 +49,18 @@ android {
     buildFeatures {
         compose = true
     }
-//    composeOptions {
-//        kotlinCompilerExtensionVersion = "1.5.1"
-//    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    apollo {
+        service("service") {
+            packageName.set("com.example.starwars")
+            introspection {
+                endpointUrl.set("https://swapi-graphql.netlify.app/.netlify/functions/index")
+                schemaFile.set(file("src/main/graphql/schema.graphqls"))
+            }
         }
     }
 }
@@ -57,6 +75,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.apollo.runtime)
+    implementation(libs.apollo.normalized.cache)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    kapt(libs.dagger.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -64,4 +88,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+kapt {
+    correctErrorTypes = true
 }

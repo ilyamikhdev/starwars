@@ -1,0 +1,10 @@
+query AllPeopleQuery {
+  allPeople {
+    people {
+      id
+      name
+      mass
+      height
+    }
+  }
+}

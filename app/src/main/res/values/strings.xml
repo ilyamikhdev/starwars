@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">starwars</string>
+    <string name="title_people">People</string>
+    <string name="height">Height: %1$s</string>
+    <string name="mass">mass: %1$s</string>
+    <string name="error">ERROR: %1$s</string>
+    <string name="loading">L O A D I N G …</string>
 </resources>
