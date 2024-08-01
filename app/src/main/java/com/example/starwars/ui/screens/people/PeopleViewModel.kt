@@ -16,14 +16,16 @@ import javax.inject.Inject
 @HiltViewModel
 class PeopleViewModel @Inject constructor(
     private val getPeopleUseCase: GetPeopleUseCase
-) : ViewModel() {private val _screenState = MutableStateFlow(PeopleState())
+) : ViewModel() {
+    private val _screenState = MutableStateFlow(PeopleState())
     val screenState: StateFlow<PeopleState> = _screenState.asStateFlow()
 
     init {
         loadPeople()
     }
 
-    private fun loadPeople() {_screenState.update { it.copy(state = UIState.LOADING) }
+    private fun loadPeople() {
+        _screenState.update { it.copy(state = UIState.LOADING) }
         viewModelScope.launch {
             when (val result = getPeopleUseCase()) {
                 is RequestResult.Success -> _screenState.update {
@@ -39,6 +41,7 @@ class PeopleViewModel @Inject constructor(
                         error = result.text
                     )
                 }
-            }}
+            }
+        }
     }
 }

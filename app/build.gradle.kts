@@ -80,7 +80,13 @@ dependencies {
     implementation(libs.apollo.normalized.cache)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+
     testImplementation(libs.junit)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.turbine)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
