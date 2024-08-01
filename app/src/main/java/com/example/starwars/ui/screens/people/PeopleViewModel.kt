@@ -2,8 +2,8 @@ package com.example.starwars.ui.screens.people
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.starwars.domain.GetPeopleUseCase
 import com.example.starwars.domain.RequestResult
+import com.example.starwars.domain.usecases.GetPeopleUseCase
 import com.example.starwars.ui.common.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

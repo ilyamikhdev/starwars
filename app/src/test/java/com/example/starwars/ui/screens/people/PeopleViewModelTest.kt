@@ -1,8 +1,8 @@
 package com.example.starwars.ui.screens.people
 
-import com.example.starwars.domain.GetPeopleUseCase
 import com.example.starwars.domain.RequestResult
 import com.example.starwars.domain.models.PersonModel
+import com.example.starwars.domain.usecases.GetPeopleUseCase
 import com.example.starwars.ui.common.UIState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

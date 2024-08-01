@@ -1,23 +1,24 @@
-package com.example.starwars.domain
+package com.example.starwars.domain.usecases
 
 import com.example.starwars.data.repo.DataRepository
-import com.example.starwars.domain.models.PersonModel
-import com.example.starwars.domain.models.mapToPersonModelList
+import com.example.starwars.domain.RequestResult
+import com.example.starwars.domain.models.PersonExtendedModel
+import com.example.starwars.domain.models.mapToPersonExtendedModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
-class GetPeopleUseCase @Inject constructor(
+class GetPersonUseCase @Inject constructor(
     private val repository: DataRepository
 ) {
 
-    suspend operator fun invoke(): RequestResult<List<PersonModel>> {
+    suspend operator fun invoke(personId: String): RequestResult<PersonExtendedModel> {
         return withContext(Dispatchers.IO) {
-            repository.loadAllPeople().fold(
+            repository.loadPersonById(personId).fold(
                 onSuccess = { value ->
-                    RequestResult.Success(data = value.people.mapToPersonModelList())
+                    RequestResult.Success(data = value.mapToPersonExtendedModel())
                 },
                 onFailure = { exception ->
                     RequestResult.Error(exception.message ?: "")

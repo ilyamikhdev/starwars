@@ -4,6 +4,7 @@ package com.example.starwars.domain
 import com.example.starwars.AllPeopleQuery
 import com.example.starwars.data.repo.DataRepository
 import com.example.starwars.domain.models.mapToPersonModelList
+import com.example.starwars.domain.usecases.GetPeopleUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

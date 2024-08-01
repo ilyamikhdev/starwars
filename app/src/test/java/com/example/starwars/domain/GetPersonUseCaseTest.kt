@@ -3,6 +3,7 @@ package com.example.starwars.domain
 import com.example.starwars.PersonByIdQuery
 import com.example.starwars.data.repo.DataRepository
 import com.example.starwars.domain.models.mapToPersonExtendedModel
+import com.example.starwars.domain.usecases.GetPersonUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
