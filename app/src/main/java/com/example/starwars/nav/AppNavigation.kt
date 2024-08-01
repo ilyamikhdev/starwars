@@ -54,7 +54,7 @@ fun AppNavigation(navHostController: NavHostController) {
         ) { backStackEntry ->
             val personViewModel: PersonViewModel = hiltViewModel()
             personViewModel.loadPerson(
-                id = backStackEntry.arguments?.getString(PERSON_ID_KEY) ?: ""
+                personId = backStackEntry.arguments?.getString(PERSON_ID_KEY) ?: ""
             )
             PersonScreen(personViewModel, navHostController)
         }

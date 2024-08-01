@@ -11,13 +11,14 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class ApiModule {
+object ApiModule {
+    private const val MEMORY_CACHE_SIZE = 5 * 1024 * 1024
 
     @Provides
     fun provideApolloClient(): ApolloClient {
         return ApolloClient.Builder()
             .serverUrl(BuildConfig.BASE_URL)
-            .normalizedCache(MemoryCacheFactory(maxSizeBytes = 5 * 1024 * 1024))
+            .normalizedCache(MemoryCacheFactory(maxSizeBytes = MEMORY_CACHE_SIZE))
             .build()
     }
 }

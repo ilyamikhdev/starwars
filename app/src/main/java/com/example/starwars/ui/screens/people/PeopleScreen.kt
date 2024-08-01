@@ -38,7 +38,7 @@ import com.example.starwars.ui.theme.ColorFF1E1266
 import com.example.starwars.ui.theme.ColorTransparent
 import com.example.starwars.ui.theme.ColorWhite
 import com.example.starwars.ui.theme.StarwarsTheme
-import com.example.starwars.ui.widgets.CustomSurface
+import com.example.starwars.ui.widgets.AppSurface
 
 @Composable
 fun PeopleScreen(viewModel: PeopleViewModel, navController: NavController) {
@@ -140,10 +140,7 @@ fun PersonItem(person: PersonModel, onClick: ((String) -> Unit)? = null) {
             tint = ColorWhite,
             contentDescription = null
         )
-
-
     }
-
 }
 
 @Composable
@@ -170,9 +167,9 @@ fun LabelStatus(text: String) {
 @Composable
 fun ContentScreenPreview() {
     StarwarsTheme {
-        CustomSurface {
+        AppSurface {
             ContentScreen(
-                {},
+                onClick = null,
                 PeopleState(
                     state = UIState.DATA,
                     data = listOf(
@@ -190,9 +187,9 @@ fun ContentScreenPreview() {
 @Composable
 fun LoadingScreenPreview() {
     StarwarsTheme {
-        CustomSurface {
+        AppSurface {
             ContentScreen(
-                {},
+                onClick = null,
                 PeopleState(
                     state = UIState.LOADING
                 )
@@ -205,9 +202,9 @@ fun LoadingScreenPreview() {
 @Composable
 fun ErrorScreenPreview() {
     StarwarsTheme {
-        CustomSurface {
+        AppSurface {
             ContentScreen(
-                {},
+                onClick = null,
                 PeopleState(
                     state = UIState.ERROR,
                     error = "No valid data"

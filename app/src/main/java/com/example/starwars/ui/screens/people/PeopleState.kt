@@ -4,7 +4,7 @@ import com.example.starwars.domain.models.PersonModel
 import com.example.starwars.ui.common.UIState
 
 data class PeopleState(
-    val state: UIState = UIState.DATA,
-    val data: List<PersonModel> = listOf(),
+    val state: UIState = UIState.LOADING,
+    val data: List<PersonModel> = emptyList(),
     val error: String? = null,
 )

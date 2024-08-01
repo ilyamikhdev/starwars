@@ -12,7 +12,7 @@ import com.example.starwars.ui.theme.ColorFF1E1266
 import com.example.starwars.ui.theme.ColorTransparent
 
 @Composable
-fun CustomSurface(block: @Composable () -> Unit) {
+fun AppSurface(content: @Composable () -> Unit) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -26,12 +26,12 @@ fun CustomSurface(block: @Composable () -> Unit) {
             ),
         color = ColorTransparent
     ) {
-        block()
+        content()
     }
 }
 
 @Preview
 @Composable
 fun CustomSurfacePreview() {
-    CustomSurface {}
+    AppSurface {}
 }

@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.example.starwars.nav.AppNavigation
 import com.example.starwars.ui.theme.StarwarsTheme
-import com.example.starwars.ui.widgets.CustomSurface
+import com.example.starwars.ui.widgets.AppSurface
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             StarwarsTheme {
-                CustomSurface {
+                AppSurface {
                     AppNavigation(navHostController = rememberNavController())
                 }
             }

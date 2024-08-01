@@ -2,31 +2,34 @@ package com.example.starwars.ui.screens.people
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.starwars.domain.PeopleUseCase
+import com.example.starwars.domain.GetPeopleUseCase
 import com.example.starwars.domain.RequestResult
 import com.example.starwars.ui.common.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PeopleViewModel @Inject constructor(
-    private val useCase: PeopleUseCase
-) : ViewModel() {
-    private val _screenState = MutableStateFlow(PeopleState())
-    val screenState: StateFlow<PeopleState> = _screenState
+    private val getPeopleUseCase: GetPeopleUseCase
+) : ViewModel() {private val _screenState = MutableStateFlow(PeopleState())
+    val screenState: StateFlow<PeopleState> = _screenState.asStateFlow()
 
     init {
-        _screenState.update { it.copy(state = UIState.LOADING) }
+        loadPeople()
+    }
+
+    private fun loadPeople() {_screenState.update { it.copy(state = UIState.LOADING) }
         viewModelScope.launch {
-            when (val result = useCase()) {
+            when (val result = getPeopleUseCase()) {
                 is RequestResult.Success -> _screenState.update {
                     it.copy(
                         state = UIState.DATA,
-                        data = result.data,
+                        data = result.data
                     )
                 }
 
@@ -36,7 +39,6 @@ class PeopleViewModel @Inject constructor(
                         error = result.text
                     )
                 }
-            }
-        }
+            }}
     }
 }

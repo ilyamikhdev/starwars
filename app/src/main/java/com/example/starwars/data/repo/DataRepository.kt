@@ -7,22 +7,19 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DataRepository  @Inject constructor(
+class DataRepository @Inject constructor(
     private val api: GraphQLApi,
 ) {
 
     suspend fun loadAllPeople(): Result<AllPeopleQuery.AllPeople> {
         return try {
-            val response = api.getAllPeople()
-
-            if (response.hasErrors()) {
-                Result.failure(Exception(response.errors?.first()?.message))
-            } else {
-                val people = response.data?.allPeople
-                if (people != null) {
-                    Result.success(people)
+            api.getAllPeople().let { response ->
+                if (response.hasErrors()) {
+                    Result.failure(Exception(response.errors?.first()?.message))
                 } else {
-                    Result.failure(Exception("People are empty."))
+                    response.data?.allPeople?.let {
+                        Result.success(it)
+                    } ?: Result.failure(Exception("People are empty."))
                 }
             }
         } catch (e: Exception) {
@@ -32,16 +29,13 @@ class DataRepository  @Inject constructor(
 
     suspend fun loadPersonById(id: String): Result<PersonByIdQuery.Person> {
         return try {
-            val response = api.getPersonDetailsById(id)
-
-            if (response.hasErrors()) {
-                Result.failure(Exception(response.errors?.first()?.message))
-            } else {
-                val person = response.data?.person
-                if (person != null) {
-                    Result.success(person)
+            api.getPersonDetailsById(id).let { response ->
+                if (response.hasErrors()) {
+                    Result.failure(Exception(response.errors?.first()?.message))
                 } else {
-                    Result.failure(Exception("The person doesn't exist."))
+                    response.data?.person?.let {
+                        Result.success(it)
+                    } ?: Result.failure(Exception("The person doesn't exist."))
                 }
             }
         } catch (e: Exception) {

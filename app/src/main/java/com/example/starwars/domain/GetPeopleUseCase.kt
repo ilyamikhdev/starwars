@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
-class PeopleUseCase @Inject constructor(
+class GetPeopleUseCase @Inject constructor(
     private val repository: DataRepository
 ) {
 

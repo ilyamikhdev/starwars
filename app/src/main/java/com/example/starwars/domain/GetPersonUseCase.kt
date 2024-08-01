@@ -9,13 +9,13 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
-class PersonUseCase @Inject constructor(
+class GetPersonUseCase @Inject constructor(
     private val repository: DataRepository
 ) {
 
-    suspend operator fun invoke(id: String): RequestResult<PersonExtendedModel> {
+    suspend operator fun invoke(personId: String): RequestResult<PersonExtendedModel> {
         return withContext(Dispatchers.IO) {
-            repository.loadPersonById(id).fold(
+            repository.loadPersonById(personId).fold(
                 onSuccess = { value ->
                     RequestResult.Success(data = value.mapToPersonExtendedModel())
                 },
