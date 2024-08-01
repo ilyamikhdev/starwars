@@ -41,7 +41,7 @@ class PersonViewModel @Inject constructor(
         }
     }
 
-    fun onShowDialog(show: Boolean) {
+    fun showDialog(show: Boolean) {
         _screenState.update { it.copy(showDialog = show) }
     }
 

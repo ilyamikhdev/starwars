@@ -11,4 +11,7 @@
     <string name="orbitalPeriod">Orbital Period: %1$s</string>
     <string name="rotationPeriod">Rotation Period: %1$s</string>
     <string name="surfaceWater">SurfaceWater: %1$s</string>
+    <string name="click">"Click "</string>
+    <string name="here">"here "</string>
+    <string name="to_view_homeworld_data_for">to view homeworld data for %1$s</string>
 </resources>

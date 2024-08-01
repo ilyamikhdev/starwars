@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -39,6 +38,7 @@ import com.example.starwars.ui.theme.ColorTransparent
 import com.example.starwars.ui.theme.ColorWhite
 import com.example.starwars.ui.theme.StarwarsTheme
 import com.example.starwars.ui.widgets.AppSurface
+import com.example.starwars.ui.widgets.StatusPlaceholder
 
 @Composable
 fun PeopleScreen(viewModel: PeopleViewModel, navController: NavController) {
@@ -61,11 +61,11 @@ fun ContentScreen(
         content = { innerPadding ->
             when (peopleState.state) {
                 UIState.LOADING -> {
-                    LabelStatus(stringResource(R.string.loading))
+                    StatusPlaceholder(stringResource(R.string.loading))
                 }
 
                 UIState.ERROR -> {
-                    LabelStatus(stringResource(R.string.error, peopleState.error ?: ""))
+                    StatusPlaceholder(stringResource(R.string.error, peopleState.error ?: ""))
                 }
 
                 UIState.DATA -> {
@@ -130,9 +130,9 @@ fun PersonItem(person: PersonModel, onClick: ((String) -> Unit)? = null) {
         horizontalArrangement = Arrangement.Absolute.SpaceBetween
     ) {
         Column {
-            Label(text = person.name ?: "")
-            Label(text = stringResource(R.string.height, person.height ?: 0))
-            Label(text = stringResource(R.string.mass, person.mass ?: 0.0))
+            DescriptionText(text = person.name ?: "")
+            DescriptionText(text = stringResource(R.string.height, person.height ?: 0))
+            DescriptionText(text = stringResource(R.string.mass, person.mass ?: 0.0))
         }
         Icon(
             modifier = Modifier.size(32.dp),
@@ -144,23 +144,13 @@ fun PersonItem(person: PersonModel, onClick: ((String) -> Unit)? = null) {
 }
 
 @Composable
-fun Label(modifier: Modifier = Modifier, text: String) {
+fun DescriptionText(modifier: Modifier = Modifier, text: String) {
     Text(
         modifier = modifier,
         text = text,
         style = MaterialTheme.typography.titleMedium,
         color = ColorWhite,
     )
-}
-
-@Composable
-fun LabelStatus(text: String) {
-    Box(
-        Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-    ) {
-        Label(text = text)
-    }
 }
 
 @Preview
