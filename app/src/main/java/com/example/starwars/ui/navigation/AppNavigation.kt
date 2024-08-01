@@ -1,4 +1,4 @@
-package com.example.starwars.nav
+package com.example.starwars.ui.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween

@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.starwars.R
 import com.example.starwars.domain.models.PersonModel
-import com.example.starwars.nav.Routes
 import com.example.starwars.ui.common.UIState
+import com.example.starwars.ui.navigation.Routes
 import com.example.starwars.ui.theme.ColorFF1E1266
 import com.example.starwars.ui.theme.ColorTransparent
 import com.example.starwars.ui.theme.ColorWhite
