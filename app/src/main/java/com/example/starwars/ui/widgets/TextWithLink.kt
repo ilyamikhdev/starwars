@@ -1,6 +1,7 @@
 package com.example.starwars.ui.widgets
 
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -42,7 +43,10 @@ fun TextWithLink(
     ClickableText(
         modifier = modifier,
         text = annotatedText,
-        style = TextStyle(color = ColorWhite),
+        style = TextStyle(
+            color = ColorWhite,
+            fontSize = MaterialTheme.typography.headlineSmall.fontSize
+        ),
         onClick = { offset ->
             val annotation = annotatedText.getStringAnnotations(
                 tag = CLICK_TAG,

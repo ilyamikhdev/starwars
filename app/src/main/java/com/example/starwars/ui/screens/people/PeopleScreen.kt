@@ -113,7 +113,7 @@ fun PeopleList(
         itemsIndexed(data) { index, item ->
             PersonItem(item, onClick)
             if (index < data.lastIndex)
-                HorizontalDivider(Modifier.padding(horizontal = 8.dp))
+                HorizontalDivider()
         }
     }
 }
