@@ -7,22 +7,20 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.example.starwars.ui.screens.people.PeopleScreen
 import com.example.starwars.ui.screens.people.PeopleViewModel
 import com.example.starwars.ui.screens.person.PersonScreen
 import com.example.starwars.ui.screens.person.PersonViewModel
-
-const val PERSON_ID_KEY = "person_id"
+import kotlinx.serialization.Serializable
 
 @Composable
 fun AppNavigation(navHostController: NavHostController) {
     NavHost(
         navController = navHostController,
-        startDestination = Routes.People.route,
+        startDestination = PeopleRoute,
         enterTransition = {
             slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start, tween(500)) +
                     fadeIn()
@@ -41,33 +39,26 @@ fun AppNavigation(navHostController: NavHostController) {
         }
 
     ) {
-        composable(Routes.People.route) {
+        composable<PeopleRoute> {
             val viewModel: PeopleViewModel = hiltViewModel()
-            PeopleScreen(viewModel, navHostController)
+            PeopleScreen(viewModel, onNavigate = { id ->
+                navHostController.navigate(PersonRoute(id))
+            })
         }
 
-        composable(
-            route = Routes.Person.route,
-            arguments = listOf(navArgument(PERSON_ID_KEY) {
-                type = NavType.StringType
-            }),
-        ) { backStackEntry ->
+        composable<PersonRoute> { backStackEntry ->
+            val personId = backStackEntry.toRoute<PersonRoute>().personId
             val personViewModel: PersonViewModel = hiltViewModel()
-            personViewModel.loadPerson(
-                personId = backStackEntry.arguments?.getString(PERSON_ID_KEY) ?: ""
-            )
-            PersonScreen(personViewModel, navHostController)
+            personViewModel.loadPerson(personId)
+            PersonScreen(personViewModel, onBack = {
+                navHostController.popBackStack()
+            })
         }
     }
 }
 
-sealed class Routes(val route: String) {
-    data object People : Routes("people")
+@Serializable
+object PeopleRoute
 
-    data object Person :
-        Routes("person/$PERSON_ID_KEY={$PERSON_ID_KEY}") {
-
-        fun addArg(personId: String) =
-            route.replace(oldValue = "{$PERSON_ID_KEY}", newValue = personId)
-    }
-}
+@Serializable
+data class PersonRoute(val personId: String)

@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.starwars.R
 import com.example.starwars.domain.models.HomeworldModel
 import com.example.starwars.domain.models.PersonExtendedModel
@@ -31,7 +30,7 @@ import com.example.starwars.ui.widgets.StatusPlaceholder
 import com.example.starwars.ui.widgets.TextWithLink
 
 @Composable
-fun PersonScreen(viewModel: PersonViewModel, navController: NavController) {
+fun PersonScreen(viewModel: PersonViewModel, onBack: (() -> Unit)) {
     val personState = viewModel.screenState.collectAsState().value
 
     when (personState.state) {
@@ -45,7 +44,7 @@ fun PersonScreen(viewModel: PersonViewModel, navController: NavController) {
 
         UIState.DATA -> {
             PersonScreen(
-                onBack = { navController.popBackStack() },
+                onBack = onBack,
                 onOpenDialog = { viewModel.showDialog(true) },
                 onCloseDialog = { viewModel.showDialog(false) },
                 showDialog = personState.showDialog,

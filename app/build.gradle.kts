@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.apollo)
+    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
 }
 
@@ -80,6 +81,7 @@ dependencies {
     implementation(libs.apollo.normalized.cache)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.kotlin)
